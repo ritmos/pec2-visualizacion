@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="PEC 2 de Visualización de Datos. Treemap, Sunburst y espiral con datos de turismo hotelero del INE.">
+<title>Fuentes y método - Turismo hotelero en España</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/d3.v7.9.0.min.js"></script>
+<script defer src="data/ine.js"></script><script defer src="data/sunburst.js"></script>
+<script defer src="assets/config.js"></script><script defer src="assets/app.js"></script>
+<script defer src="assets/treemap.js"></script><script defer src="assets/sunburst.js"></script>
+<script defer src="assets/spiral.js"></script></head>
+<body data-page="methods"><a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="index.html">Turismo hotelero en España</a>
+<p class="byline">Daniel García Asensio. PEC 2 de Visualización de Datos, UOC.</p>
+<nav class="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="treemap.html">Treemap</a><a href="sunburst.html">Sunburst</a><a href="espiral.html">Espiral</a><a href="metodologia.html" aria-current="page">Fuentes</a></nav></div></header>
+<main id="main" class="wrap"><div class="page-heading"><h1>Fuentes y método</h1><p class="lead">Datos, preparación y criterios de representación.</p></div><article class="prose"><h2>Datos utilizados</h2>
+<p>Los datos proceden de la Encuesta de Ocupación Hotelera del INE. Se representan noches de estancia en hoteles. No son personas únicas ni incluyen apartamentos o viviendas vacacionales. La residencia del viajero no equivale a su nacionalidad.</p>
+<div class="table-wrap"><table><thead><tr><th>Gráfico</th><th>Datos</th><th>Fuente</th></tr></thead><tbody>
+<tr><td>Treemap</td><td>2025, por comunidad y provincia. Ceuta y Melilla se mantienen como ciudades autónomas.</td><td><a href="https://www.ine.es/jaxiT3/Tabla.htm?L=0&amp;t=2074">Tabla 2074</a></td></tr>
+<tr><td>Sunburst</td><td>2025, por isla y residencia. Se usan los totales anuales publicados.</td><td><a href="https://www.ine.es/jaxi/Tabla.htm?tpx=82074&amp;L=0">Tabla 82074</a></td></tr>
+<tr><td>Espiral</td><td>2015 a 2025. España, 19 comunidades y ciudades autónomas, y 50 provincias.</td><td><a href="https://www.ine.es/jaxiT3/Tabla.htm?L=0&amp;t=2074">Tabla 2074</a></td></tr></tbody></table></div>
+<p>Descargas: tabla 2074, 2026-10-30; tabla 82074, 2026-10-30. Se guarda una copia fija de los archivos para poder repetir el análisis. El INE puede revisar sus cifras.</p>
+<h2>Preparación</h2><p>Python selecciona las pernoctaciones, interpreta fechas y cifras, y comprueba que no se repitan observaciones. El Treemap suma los meses de 2025 y construye la jerarquía con las unidades finales. No se suman a la vez provincias, comunidades y total nacional.</p>
+<p>El Sunburst conserva las siete islas publicadas y excluye zonas que se solapan, como Sur de Tenerife. La Graciosa no tiene un desglose independiente. El Hierro tiene meses sin dato, pero sí cifras anuales, que son las utilizadas. En Lanzarote, la suma de los dos grupos supera en una noche el total publicado. Se conservan las cifras originales. Las 14 hojas suman 72.956.848 noches.</p>
+<p>De las 27.720 observaciones mensuales seleccionadas, 42 no tienen dato. Se concentran en cinco provincias de Castilla y León. Se conservan como valores ausentes. Los ceros publicados, como los de abril de 2020, se mantienen como cero. No se interpolan meses.</p>
+<h2>Escalas</h2><p>En el Treemap, el área representa pernoctaciones y el color separa grupos. En el Sunburst, el ángulo representa la cantidad y el radio indica el nivel de la jerarquía. Al ampliar un territorio, los porcentajes se refieren a esa vista.</p>
+<p>En la espiral, una vuelta es un año. La opción Color usa tramos fijos para el porcentaje anual y una escala lineal para las pernoctaciones. Los tramos son: menos del 4 %, de 4 a 8 %, de 8 a 12 %, de 12 a 16 %, de 16 a 20 % y 20 % o más. Se incluye el límite inferior de cada tramo.</p>
+<p>La opción Altura usa barras de un solo color. Su altura se mide desde la curva hacia fuera, con una escala lineal de cero al máximo de la selección. Ambas espirales usan la misma escala. Las barras caben entre vueltas sin recortar los valores. El área de los sectores aumenta con el radio: se debe comparar la altura de las barras, no su área ni la distancia al centro.</p>
+<p>El porcentaje es <code>100 * noches del mes / noches del mismo año</code>, para el mismo territorio y residencia. Si falta algún mes o el total anual es cero, el porcentaje no se calcula. Los meses conocidos siguen disponibles como valores absolutos.</p>
+<p>Los meses tienen distinta duración y se muestran sus totales, no tasas diarias. Los porcentajes sirven para comparar distribución, pero ocultan el volumen. Un mes con mucho peso en 2020 puede tener pocas noches en términos absolutos.</p>
+<h2>Uso y accesibilidad</h2><p>Los controles funcionan con teclado. Se ofrecen cifras al pasar el cursor, ampliación en los gráficos jerárquicos y tablas descargables. Las etiquetas pequeñas se pueden consultar en el detalle. Las exportaciones SVG incluyen título, escala y fuente.</p>
+<h2>Descargas</h2><ul>
+<li><a href="data/series_mensuales.csv">Series mensuales en CSV</a></li>
+<li><a href="data/treemap_2025.csv">Datos del Treemap en CSV</a></li>
+<li><a href="data/sunburst.csv">Datos del Sunburst en CSV</a></li>
+<li><a href="data/ine.json">Datos y metadatos de la tabla 2074 en JSON</a></li>
+<li><a href="data/sunburst.json">Datos y comprobaciones del Sunburst en JSON</a></li>
+<li><a href="data/tecnicas.json">Fichas de las técnicas y referencias en JSON</a></li></ul>
+<h2>Créditos</h2><p>Trabajo de Daniel García Asensio para la PEC 2 de Visualización de Datos de la UOC. Programado con Python, D3.js, SVG, HTML y CSS, con apoyo de IA para investigación, programación y revisión.</p>
+<p>Elaboración propia con datos extraídos del sitio web del INE: www.ine.es. Datos bajo <a href="https://www.ine.es/aviso_legal/">licencia CC BY 4.0</a>. D3.js 7.9.0 se incluye con su <a href="assets/D3-LICENSE.txt">licencia ISC</a>.</p>
+<h2 id="bibliografia">Referencias</h2><ol class="source-list"><li><a href="https://www.cs.umd.edu/hcil/treemap-history/">Treemaps for space-constrained visualization of hierarchies</a>. Ben Shneiderman, Catherine Plaisant. Historia iniciada en 1998; actualizada hasta 2014.</li><li><a href="https://www.cs.umd.edu/projects/hcil/pubs/tech-reports.shtml">Tree-maps: A space-filling approach to the visualization of hierarchical information structures</a>. Brian Johnson, Ben Shneiderman. 1991.</li><li><a href="https://sites.cc.gatech.edu/gvu/ii/sunburst/">SunBurst project</a>. John Stasko y colaboradores. Finales de los noventa y 2000.</li><li><a href="https://faculty.cc.gatech.edu/~stasko/papers/infovis00.pdf">Focus+Context Display and Navigation Techniques for Enhancing Radial, Space-Filling Hierarchy Visualizations</a>. John Stasko, Eugene Zhang. 2000.</li><li><a href="https://faculty.cc.gatech.edu/~stasko/papers/ijhcs00.pdf">An evaluation of space-filling information visualizations for depicting hierarchical structures</a>. John Stasko, Richard Catrambone, Mark Guzdial, Kevin McDonald. 2000.</li><li><a href="https://experts.umn.edu/en/publications/interactive-visualization-of-serial-periodic-data/">Interactive Visualization of Serial Periodic Data</a>. John V. Carlis, Joseph A. Konstan. 1998.</li><li><a href="https://doi.org/10.1109/INFVIS.2001.963273">Visualizing Time-Series on Spirals</a>. Marc Weber, Marc Alexa, Wolfgang Müller. 2001.</li><li><a href="https://datavizcatalogue.com/ES/">Catálogo de Visualización de Datos: mapa de árbol, tarta multinivel y diagrama en espiral</a>.</li><li><a href="https://www.ine.es/jaxiT3/Tabla.htm?L=0&amp;t=2074">Encuesta de Ocupación Hotelera: viajeros y pernoctaciones por comunidades autónomas y provincias, tabla 2074</a>.</li><li><a href="https://www.ine.es/jaxi/Tabla.htm?tpx=82074&amp;L=0">Encuesta de ocupación hotelera 2025: pernoctaciones de los viajeros por zonas turísticas, país de residencia y meses, TPX 82074</a>.</li><li><a href="https://www.ine.es/aviso_legal/">Aviso legal del INE: reutilización de la información</a>.</li></ol>
+<p>También se han aplicado los materiales del aula sobre creación y rediseño de gráficos, preparación de datos, color y accesibilidad.</p></article></main>
+<footer class="footer"><p>Elaboración propia con datos del INE. <a href="metodologia.html">Fuentes y método</a>.</p></footer>
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<p id="status" class="sr-only" role="status" aria-live="polite"></p>
+<noscript><div class="wrap error">Activa JavaScript para ver los gráficos. También puedes descargar los <a href="data/series_mensuales.csv">datos mensuales</a>, los del <a href="data/treemap_2025.csv">Treemap</a> y los del <a href="data/sunburst.csv">Sunburst</a>.</div></noscript>
+</body></html>

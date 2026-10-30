@@ -1,0 +1,233 @@
+{
+  "year": 2025,
+  "unit": "pernoctaciones",
+  "scope": "Hoteles",
+  "total": 72956848,
+  "source": {
+    "name": "Instituto Nacional de Estadística (INE)",
+    "operation": "Encuesta de ocupación hotelera 2025",
+    "table": "TPX 82074",
+    "title": "Pernoctaciones de los viajeros por zonas turísticas, país de residencia y meses",
+    "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=82074&L=0",
+    "downloadUrl": "https://www.ine.es/jaxi/files/tpx/es/csv_bdsc/82074.csv",
+    "indexUrl": "https://www.ine.es/dynt3/inebase/es/index.htm?capsel=13988&padre=13976",
+    "sourceUpdatedAsObserved": "2026-08-14",
+    "sourceMetadataCheckedAt": "2026-10-30",
+    "retrievedAt": "2026-10-30T20:32:31.211680+00:00",
+    "sha256": "7819a3e2ba729822a8efa925cfa86205c8bbb63eca99057bb326d45b26e5b889",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://www.ine.es/aviso_legal/",
+    "attribution": "Elaboración propia con datos extraídos del sitio web del INE: www.ine.es"
+  },
+  "residenceLabels": {
+    "residentes": "Residentes en España",
+    "extranjeros": "Residentes fuera de España"
+  },
+  "islands": [
+    {
+      "id": "ES708",
+      "name": "Lanzarote",
+      "values": {
+        "residentes": 1377317,
+        "extranjeros": 10188172
+      },
+      "total": 11565489,
+      "publishedTotal": 11565488
+    },
+    {
+      "id": "ES704",
+      "name": "Fuerteventura",
+      "values": {
+        "residentes": 1148561,
+        "extranjeros": 12635035
+      },
+      "total": 13783596,
+      "publishedTotal": 13783596
+    },
+    {
+      "id": "ES705",
+      "name": "Gran Canaria",
+      "values": {
+        "residentes": 2742463,
+        "extranjeros": 17183936
+      },
+      "total": 19926399,
+      "publishedTotal": 19926399
+    },
+    {
+      "id": "ES709",
+      "name": "Tenerife",
+      "values": {
+        "residentes": 3598864,
+        "extranjeros": 22641195
+      },
+      "total": 26240059,
+      "publishedTotal": 26240059
+    },
+    {
+      "id": "ES706",
+      "name": "La Gomera",
+      "values": {
+        "residentes": 106492,
+        "extranjeros": 367351
+      },
+      "total": 473843,
+      "publishedTotal": 473843
+    },
+    {
+      "id": "ES707",
+      "name": "La Palma",
+      "values": {
+        "residentes": 359082,
+        "extranjeros": 552505
+      },
+      "total": 911587,
+      "publishedTotal": 911587
+    },
+    {
+      "id": "ES703",
+      "name": "El Hierro",
+      "values": {
+        "residentes": 40591,
+        "extranjeros": 15284
+      },
+      "total": 55875,
+      "publishedTotal": 55875
+    }
+  ],
+  "notes": [
+    "Solo establecimientos hoteleros: no incluye apartamentos turísticos ni viviendas vacacionales.",
+    "La procedencia se define por residencia, no por nacionalidad. El código interno 'extranjeros' corresponde a 'No residentes en España' en la fuente.",
+    "Se seleccionan exclusivamente las siete islas publicadas por INE. Se excluyen Sur de Gran Canaria y Sur de Tenerife porque se solapan con sus islas.",
+    "La Graciosa no dispone de una fila independiente en esta tabla; no se le asignan datos ni se inventa un desglose.",
+    "Se usan los totales anuales publicados, no la suma de los meses. El Hierro tiene valores mensuales no disponibles en mayo y octubre, pero su total anual está publicado.",
+    "El ángulo de cada isla se calcula sumando sus dos hojas. En Lanzarote esa suma supera en una pernoctación el total insular publicado; se conserva la cifra de cada hoja y se documenta la diferencia compatible con el redondeo de las estimaciones."
+  ],
+  "validation": {
+    "island_count": 7,
+    "leaf_count": 14,
+    "missing_annual_values": 0,
+    "sum_published_island_totals": 72956847,
+    "sum_leaves": 72956848,
+    "monthly_checks": [
+      {
+        "island": "Lanzarote",
+        "residence": "Residentes en España",
+        "annual": 1377317,
+        "missing_months": [],
+        "sum_of_months": 1377318,
+        "monthly_sum_minus_annual": 1
+      },
+      {
+        "island": "Lanzarote",
+        "residence": "No residentes en España",
+        "annual": 10188172,
+        "missing_months": [],
+        "sum_of_months": 10188172,
+        "monthly_sum_minus_annual": 0
+      },
+      {
+        "island": "Fuerteventura",
+        "residence": "Residentes en España",
+        "annual": 1148561,
+        "missing_months": [],
+        "sum_of_months": 1148562,
+        "monthly_sum_minus_annual": 1
+      },
+      {
+        "island": "Fuerteventura",
+        "residence": "No residentes en España",
+        "annual": 12635035,
+        "missing_months": [],
+        "sum_of_months": 12635034,
+        "monthly_sum_minus_annual": -1
+      },
+      {
+        "island": "Gran Canaria",
+        "residence": "Residentes en España",
+        "annual": 2742463,
+        "missing_months": [],
+        "sum_of_months": 2742462,
+        "monthly_sum_minus_annual": -1
+      },
+      {
+        "island": "Gran Canaria",
+        "residence": "No residentes en España",
+        "annual": 17183936,
+        "missing_months": [],
+        "sum_of_months": 17183936,
+        "monthly_sum_minus_annual": 0
+      },
+      {
+        "island": "Tenerife",
+        "residence": "Residentes en España",
+        "annual": 3598864,
+        "missing_months": [],
+        "sum_of_months": 3598865,
+        "monthly_sum_minus_annual": 1
+      },
+      {
+        "island": "Tenerife",
+        "residence": "No residentes en España",
+        "annual": 22641195,
+        "missing_months": [],
+        "sum_of_months": 22641195,
+        "monthly_sum_minus_annual": 0
+      },
+      {
+        "island": "La Gomera",
+        "residence": "Residentes en España",
+        "annual": 106492,
+        "missing_months": [],
+        "sum_of_months": 106491,
+        "monthly_sum_minus_annual": -1
+      },
+      {
+        "island": "La Gomera",
+        "residence": "No residentes en España",
+        "annual": 367351,
+        "missing_months": [],
+        "sum_of_months": 367351,
+        "monthly_sum_minus_annual": 0
+      },
+      {
+        "island": "La Palma",
+        "residence": "Residentes en España",
+        "annual": 359082,
+        "missing_months": [],
+        "sum_of_months": 359083,
+        "monthly_sum_minus_annual": 1
+      },
+      {
+        "island": "La Palma",
+        "residence": "No residentes en España",
+        "annual": 552505,
+        "missing_months": [],
+        "sum_of_months": 552505,
+        "monthly_sum_minus_annual": 0
+      },
+      {
+        "island": "El Hierro",
+        "residence": "Residentes en España",
+        "annual": 40591,
+        "missing_months": [
+          "Mayo",
+          "Octubre"
+        ],
+        "sum_of_months": null,
+        "monthly_sum_minus_annual": null
+      },
+      {
+        "island": "El Hierro",
+        "residence": "No residentes en España",
+        "annual": 15284,
+        "missing_months": [
+          "Mayo",
+          "Octubre"
+        ],
+        "sum_of_months": null,
+        "monthly_sum_minus_annual": null
+      }
+    ]
+  }
+}

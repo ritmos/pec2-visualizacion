@@ -1,5 +1,28 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PEC 2 Visualización</title>
-<style>body{font-family:system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 16px}</style></head>
-<body><h1>PEC 2 · Visualización de datos</h1><p>Treemap · Sunburst · Spiral plot — en construcción.</p></body></html>
+<meta name="description" content="PEC 2 de Visualización de Datos. Treemap, Sunburst y espiral con datos de turismo hotelero del INE.">
+<title>Inicio - Turismo hotelero en España</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/d3.v7.9.0.min.js"></script>
+<script defer src="data/ine.js"></script><script defer src="data/sunburst.js"></script>
+<script defer src="assets/config.js"></script><script defer src="assets/app.js"></script>
+<script defer src="assets/treemap.js"></script><script defer src="assets/sunburst.js"></script>
+<script defer src="assets/spiral.js"></script></head>
+<body data-page="home"><a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="index.html">Turismo hotelero en España</a>
+<p class="byline">Daniel García Asensio. PEC 2 de Visualización de Datos, UOC.</p>
+<nav class="nav" aria-label="Navegación principal"><a href="index.html" aria-current="page">Inicio</a><a href="treemap.html">Treemap</a><a href="sunburst.html">Sunburst</a><a href="espiral.html">Espiral</a><a href="metodologia.html">Fuentes</a></nav></div></header>
+<main id="main" class="wrap"><div class="home-text"><h1>Visualizaciones del turismo hotelero</h1>
+<p>Este trabajo aplica tres técnicas a los datos de la Encuesta de Ocupación Hotelera del INE. Cada gráfico responde a una pregunta distinta.</p>
+<div class="home-sections">
+<section><h2><a href="treemap.html">1. Treemap: distribución por territorio</a></h2><p>Pernoctaciones de 2025 por comunidad y provincia. Permite ver dónde se concentra la actividad hotelera.</p></section>
+<section><h2><a href="sunburst.html">2. Sunburst: islas de Canarias</a></h2><p>Pernoctaciones de 2025 por isla y residencia del viajero. Se puede ampliar cada isla para ver su composición.</p></section>
+<section><h2><a href="espiral.html">3. Espiral: evolución mensual</a></h2><p>Datos de 2015 a 2025, con selección de territorio y comparación entre dos lugares. Se puede representar el valor mediante color o altura.</p></section>
+</div>
+<h2>Sobre los datos</h2><p>Una pernoctación es una noche de estancia de una persona. Los datos se refieren a hoteles, no a todo el turismo ni a personas únicas.</p>
+<p>En cada página se pueden consultar las cifras y descargar el gráfico. Las <a href="metodologia.html">fuentes y decisiones de preparación</a> se explican por separado.</p></div></main>
+<footer class="footer"><p>Elaboración propia con datos del INE. <a href="metodologia.html">Fuentes y método</a>.</p></footer>
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<p id="status" class="sr-only" role="status" aria-live="polite"></p>
+<noscript><div class="wrap error">Activa JavaScript para ver los gráficos. También puedes descargar los <a href="data/series_mensuales.csv">datos mensuales</a>, los del <a href="data/treemap_2025.csv">Treemap</a> y los del <a href="data/sunburst.csv">Sunburst</a>.</div></noscript>
+</body></html>

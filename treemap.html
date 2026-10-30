@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="PEC 2 de Visualización de Datos. Treemap, Sunburst y espiral con datos de turismo hotelero del INE.">
+<title>Treemap - Turismo hotelero en España</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/d3.v7.9.0.min.js"></script>
+<script defer src="data/ine.js"></script><script defer src="data/sunburst.js"></script>
+<script defer src="assets/config.js"></script><script defer src="assets/app.js"></script>
+<script defer src="assets/treemap.js"></script><script defer src="assets/sunburst.js"></script>
+<script defer src="assets/spiral.js"></script></head>
+<body data-page="treemap"><a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="index.html">Turismo hotelero en España</a>
+<p class="byline">Daniel García Asensio. PEC 2 de Visualización de Datos, UOC.</p>
+<nav class="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="treemap.html" aria-current="page">Treemap</a><a href="sunburst.html">Sunburst</a><a href="espiral.html">Espiral</a><a href="metodologia.html">Fuentes</a></nav></div></header>
+<main id="main" class="wrap"><div class="page-heading"><h1>Treemap: pernoctaciones por territorio</h1><p class="lead">Datos de España en 2025. Las provincias están agrupadas en su comunidad; Ceuta y Melilla figuran como ciudades autónomas.</p></div><div class="controls"><div class="control wide"><label for="treemap-region">Territorio</label><select id="treemap-region"></select></div><p class="control-note">Pulsa una comunidad en el gráfico o selecciónala en el menú para ampliar sus provincias.</p><button id="treemap-reset">Ver toda España</button></div>
+<section class="chart-panel" aria-label="Treemap de pernoctaciones"><div class="metric-strip" id="treemap-metrics"></div>
+<div class="panel-top"><p>El área representa las pernoctaciones. El color ayuda a separar comunidades.</p><button data-export="treemap-svg">Descargar SVG</button></div><div class="chart-host" id="treemap-chart"></div>
+<p class="chart-footnote">La posición de los rectángulos no es geográfica. Consulta los nombres y las cifras para identificar cada territorio.</p></section>
+<div class="insight"><p id="treemap-insight"></p></div><div class="support-grid"><details><summary>Cómo se lee</summary><div class="details-content"><p>Las provincias aparecen dentro de su comunidad. Cuantas más noches de estancia, mayor es el rectángulo. Al ampliar una comunidad, los porcentajes se calculan sobre esa vista.</p><p>Pasa el cursor por un rectángulo para ver sus datos. También puedes entrar con Tab, moverte con las flechas y pulsar Enter para ampliar. Las etiquetas que no caben se pueden consultar en la tabla.</p></div></details>
+<details><summary>Historia y limitaciones</summary><div class="details-content"><p>Ben Shneiderman ideó el treemap en 1990 para localizar el uso del espacio en un disco compartido. Brian Johnson desarrolló y refinó la implementación. Los informes y el artículo conjunto de 1991 preceden al artículo de Shneiderman de 1992.</p><p>Permite ver la concentración de los datos en poco espacio. Cuesta comparar áreas parecidas y leer las categorías pequeñas. No hay un máximo fijo de registros: aquí se muestran 52 unidades finales y se permite ampliar.</p><p>Otros usos: uso de almacenamiento por carpetas y archivos, presupuestos por área y programa, ventas por categoría y producto.</p><p><a href="metodologia.html#bibliografia">Referencias</a></p></div></details></div><details class="data-details"><summary>Ver datos y descargar CSV</summary><div class="table-download"><button id="download-csv">Descargar esta selección</button></div><div class="table-wrap"><table id="data-table"><caption>Pernoctaciones de 2025. Porcentajes sobre el total de la vista.</caption><thead></thead><tbody></tbody></table></div></details></main>
+<footer class="footer"><p>Elaboración propia con datos del INE. <a href="metodologia.html">Fuentes y método</a>.</p></footer>
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<p id="status" class="sr-only" role="status" aria-live="polite"></p>
+<noscript><div class="wrap error">Activa JavaScript para ver los gráficos. También puedes descargar los <a href="data/series_mensuales.csv">datos mensuales</a>, los del <a href="data/treemap_2025.csv">Treemap</a> y los del <a href="data/sunburst.csv">Sunburst</a>.</div></noscript>
+</body></html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="PEC 2 de Visualización de Datos. Treemap, Sunburst y espiral con datos de turismo hotelero del INE.">
+<title>Espiral - Turismo hotelero en España</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/d3.v7.9.0.min.js"></script>
+<script defer src="data/ine.js"></script><script defer src="data/sunburst.js"></script>
+<script defer src="assets/config.js"></script><script defer src="assets/app.js"></script>
+<script defer src="assets/treemap.js"></script><script defer src="assets/sunburst.js"></script>
+<script defer src="assets/spiral.js"></script></head>
+<body data-page="spiral"><a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="masthead"><div class="masthead-inner"><a class="brand" href="index.html">Turismo hotelero en España</a>
+<p class="byline">Daniel García Asensio. PEC 2 de Visualización de Datos, UOC.</p>
+<nav class="nav" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="treemap.html">Treemap</a><a href="sunburst.html">Sunburst</a><a href="espiral.html" aria-current="page">Espiral</a><a href="metodologia.html">Fuentes</a></nav></div></header>
+<main id="main" class="wrap"><div class="page-heading"><h1>Espiral: pernoctaciones por mes</h1><p class="lead">Cada vuelta representa un año. Los meses se alinean para comparar su comportamiento de un año a otro y entre territorios.</p></div><div class="presets"><button id="preset-islands">Comparar Canarias y Baleares</button><button id="preset-spain">Ver España</button></div>
+<div class="controls">
+<div class="control wide"><label for="geo-a">Territorio A</label><select id="geo-a"></select></div>
+<div class="control wide" id="control-b"><label for="geo-b">Territorio B</label><select id="geo-b"></select></div>
+<div class="control"><label for="residence">Residencia</label><select id="residence"><option value="total">Todas</option><option value="residentes">En España</option><option value="extranjeros">Fuera de España</option></select></div>
+<div class="control"><label for="measure">Medida</label><select id="measure"><option value="share">% anual</option><option value="absolute">Pernoctaciones</option></select></div>
+<div class="control"><label for="encoding">Representación</label><select id="encoding"><option value="color">Color</option><option value="height">Altura</option></select></div>
+<div class="control compact"><label for="start-year">Desde</label><select id="start-year"></select></div>
+<div class="control compact"><label for="end-year">Hasta</label><select id="end-year"></select></div>
+<div class="control check"><input type="checkbox" id="compare" checked><label for="compare">Comparar dos territorios</label></div></div>
+<div class="legend" id="spiral-legend" aria-label="Escala compartida"></div>
+<div class="spiral-layout" id="spiral-layout"><section class="chart-panel" id="panel-a"><div class="panel-top"><strong id="spiral-a-title">Territorio A</strong><button data-export="spiral-a-svg">Descargar SVG</button></div><div class="chart-host" id="spiral-a"></div></section><section class="chart-panel" id="panel-b"><div class="panel-top"><strong id="spiral-b-title">Territorio B</strong><button data-export="spiral-b-svg">Descargar SVG</button></div><div class="chart-host" id="spiral-b"></div></section></div>
+<p class="readout" id="spiral-readout">Señala un mes para consultar sus datos.</p>
+<p class="chart-footnote" id="spiral-note"></p>
+<div class="insight"><p id="spiral-insight"></p></div><div class="support-grid"><details><summary>Cómo se lee</summary><div class="details-content"><p>La serie empieza en el centro y avanza hacia fuera en sentido horario. Cada vuelta es un año y cada sector, un mes.</p><p>Con Color, el valor se representa por el relleno del sector. Con Altura, se mide desde la curva de la espiral hasta el borde de la barra, con una escala lineal que empieza en cero. La distancia al centro incluye también el tiempo, así que no sirve para comparar valores.</p><p>Las dos vistas comparten periodo, residencia, medida y escala. El porcentaje divide las noches de cada mes entre las de su mismo año. El modo de pernoctaciones conserva los volúmenes absolutos.</p><p>Tab entra en el gráfico. Las flechas izquierda y derecha recorren meses; arriba y abajo saltan un año. La trama señala valores sin dato o porcentajes que no se pueden calcular.</p></div></details>
+<details><summary>Historia y limitaciones</summary><div class="details-content"><p>Carlis y Konstan publicaron Interactive Visualization of Serial Periodic Data en 1998. Weber, Alexa y Müller desarrollaron el enfoque Spiral Graph en Visualizing Time-Series on Spirals, publicado en 2001. Son referencias modernas de la técnica, no una atribución del origen histórico de cualquier dibujo en espiral.</p><p>Ayuda a reconocer ciclos. El color permite una lectura aproximada y las barras resultan difíciles de comparar entre vueltas. Con pocos años se ven mejor las alturas. Los porcentajes ocultan diferencias de volumen y pueden ser altos en años de poca actividad, como 2020.</p><p>Otros usos: temperaturas estacionales, consumo energético, actividad turística, comportamientos con ciclos diarios o semanales.</p><p><a href="metodologia.html#bibliografia">Referencias</a></p></div></details></div><details class="data-details"><summary>Ver datos y descargar CSV</summary><div class="table-download"><button id="download-csv">Descargar esta selección</button></div><div class="table-wrap"><table id="data-table"><caption>Datos de los territorios seleccionados. El porcentaje requiere doce meses disponibles y un total anual positivo.</caption><thead></thead><tbody></tbody></table></div></details></main>
+<footer class="footer"><p>Elaboración propia con datos del INE. <a href="metodologia.html">Fuentes y método</a>.</p></footer>
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<p id="status" class="sr-only" role="status" aria-live="polite"></p>
+<noscript><div class="wrap error">Activa JavaScript para ver los gráficos. También puedes descargar los <a href="data/series_mensuales.csv">datos mensuales</a>, los del <a href="data/treemap_2025.csv">Treemap</a> y los del <a href="data/sunburst.csv">Sunburst</a>.</div></noscript>
+</body></html>

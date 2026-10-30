@@ -1,0 +1,330 @@
+{
+  "verified_on": "2026-10-30",
+  "purpose": "Base bibliográfica y criterios de diseño para las tres técnicas de la PEC 2. Las cifras del proyecto deben proceder de los archivos de datos verificados, no de este documento.",
+  "techniques": {
+    "treemap": {
+      "name": "Treemap, mapa de árbol",
+      "definition": "Partición de una superficie rectangular en recintos anidados que representan una jerarquía y sus cantidades.",
+      "history": "Ben Shneiderman ideó el treemap en 1990 para localizar el uso del espacio en un disco compartido. Brian Johnson desarrolló y refinó la implementación. Los informes y el artículo conjunto de 1991 preceden al artículo de Shneiderman de 1992.",
+      "history_source_ids": [
+        "shneiderman-history",
+        "johnson-shneiderman-1991"
+      ],
+      "encoding": {
+        "area": "Cantidad aditiva no negativa, proporcional al valor de cada hoja dentro del espacio disponible; los márgenes se reservan para separación y etiquetas.",
+        "containment": "Relación padre-hijo: las provincias se agrupan en su comunidad autónoma.",
+        "color": "Identidad o pertenencia a una comunidad; no introducir una segunda magnitud sin una leyenda específica.",
+        "position": "Resultado del algoritmo de partición. No representa posición geográfica."
+      },
+      "data": {
+        "structure": "Árbol con un único padre por nodo, o tabla de rutas categóricas y valor cuantitativo por hoja.",
+        "categorical": [
+          "comunidad autónoma",
+          "provincia o ciudad autónoma"
+        ],
+        "quantitative": "Pernoctaciones: estimación de recuentos persona-noche; cantidad no negativa y sumable.",
+        "constraints": [
+          "No sumar conjuntamente el total de España, los totales de comunidades y sus provincias.",
+          "Las hojas del mismo nivel deben representar categorías sin solapamiento.",
+          "Los valores negativos no se pueden representar mediante áreas; un cero no tiene área visible.",
+          "Los valores ausentes no equivalen a cero.",
+          "Documentar diferencias de redondeo entre agregados publicados y sumas de sus componentes."
+        ]
+      },
+      "advantages": [
+        "Permite detectar concentración y comparar el peso de partes dentro de un total.",
+        "Utiliza de forma compacta el espacio de pantalla.",
+        "Muestra simultáneamente la agrupación territorial y la contribución de sus hojas."
+      ],
+      "limitations": [
+        "Las diferencias pequeñas de área son difíciles de comparar con precisión.",
+        "Los elementos de poco peso y sus etiquetas pueden resultar muy pequeños.",
+        "La posición puede cambiar al variar datos o filtros; no debe interpretarse como un mapa geográfico."
+      ],
+      "size_guidance": "No existe un máximo universal de filas. El límite práctico depende de la pantalla, el reparto de tamaños, las etiquetas y la navegación. Para la demostración conviene mantener dos niveles visibles y permitir acceder al detalle. Una sola categoría puede dibujarse, pero aporta poco a una comparación.",
+      "usual_applications": [
+        "Uso de almacenamiento por carpetas y archivos",
+        "Presupuestos por área y programa",
+        "Ventas por categoría y producto"
+      ],
+      "project": {
+        "question": "¿Dónde se concentran las pernoctaciones hoteleras de España en 2025?",
+        "audience": "Público interesado en turismo y planificación territorial.",
+        "selection": "España → comunidades → provincias, tratando las ciudades autónomas según su nivel territorial real.",
+        "insight_rule": "Identificar concentración utilizando el área y comprobar cantidades y porcentajes en el detalle. No deducir causas a partir del tamaño de las áreas."
+      },
+      "spoken_base": "El Treemap o mapa de árbol representa una jerarquía mediante rectángulos anidados. Shneiderman lo ideó en 1990 para entender cómo se ocupaba un disco, y Brian Johnson desarrolló su implementación. Aquí aplico esa idea a las pernoctaciones hoteleras: cada territorio ocupa una superficie proporcional a su cantidad y las provincias están agrupadas en su comunidad. Los nombres son variables categóricas y las pernoctaciones son una cantidad que podemos sumar. Su ventaja es mostrar concentración en poco espacio. Su límite es que cuesta comparar áreas parecidas y leer las categorías pequeñas. No hay un máximo universal de registros; depende de la legibilidad."
+    },
+    "sunburst": {
+      "name": "Sunburst, diagrama de tarta multinivel",
+      "definition": "Representación radial de una jerarquía en la que los anillos indican niveles y cada descendiente ocupa una parte del intervalo angular de su padre.",
+      "history": "El Sunburst fue desarrollado y evaluado por John Stasko y colaboradores en Georgia Tech a finales de los noventa. Stasko y Eugene Zhang publicaron técnicas de navegación en 2000. Su artículo reconoce antecedentes radiales de 1998, incluidos Information Slices de Keith Andrews y Helmut Heidegger y el trabajo de Mei C. Chuah. No se atribuye a una persona la invención de toda la familia de jerarquías radiales.",
+      "history_source_ids": [
+        "sunburst-project",
+        "stasko-zhang-2000",
+        "stasko-et-al-2000"
+      ],
+      "encoding": {
+        "angle": "Proporcional a las pernoctaciones. Los hijos subdividen el ángulo del padre.",
+        "radial_depth": "Nivel jerárquico, no cantidad de pernoctaciones.",
+        "color": "Agrupación o categoría, con leyenda explícita y suficiente contraste.",
+        "area_caution": "No comparar el área de sectores de anillos distintos: el radio contribuye al área. Tampoco sumar anillos, porque representan el mismo total a diferentes niveles."
+      },
+      "data": {
+        "structure": "Árbol ponderado o tabla de rutas isla-residencia y valor por combinación.",
+        "categorical": [
+          "isla",
+          "residencia del viajero"
+        ],
+        "quantitative": "Pernoctaciones hoteleras anuales de 2025 publicadas por el INE en la tabla TPX 82074.",
+        "constraints": [
+          "La residencia es un criterio de clasificación, no la nacionalidad del viajero.",
+          "La isla y la provincia son niveles territoriales distintos.",
+          "El total de cada padre se calcula a partir de hojas mutuamente excluyentes.",
+          "Debe indicarse si el porcentaje mostrado usa como denominador Canarias o la isla seleccionada.",
+          "No sustituir ausencia de información por cero ni forzar segmentos a tener un tamaño mínimo que altere proporciones."
+        ]
+      },
+      "advantages": [
+        "Hace visible la secuencia de niveles desde el centro hacia el exterior.",
+        "Permite explorar la composición de cada grupo y su relación con el total.",
+        "Una selección puede destacar una rama conservando contexto."
+      ],
+      "limitations": [
+        "Los sectores de poco peso son difíciles de leer y seleccionar.",
+        "Los ángulos se comparan con menos precisión que longitudes alineadas.",
+        "Muchas ramas o demasiados anillos dificultan el seguimiento de la jerarquía."
+      ],
+      "size_guidance": "No hay un máximo universal. Esta demostración utiliza dos anillos de datos, con siete islas y catorce hojas de residencia, además del centro con el total. Se conservan los valores pequeños mediante tabla y detalle, sin aumentar artificialmente su ángulo. Un solo anillo de categorías equivaldría esencialmente a un gráfico circular y no demostraría la jerarquía multinivel.",
+      "usual_applications": [
+        "Exploración de directorios",
+        "Composición de catálogos",
+        "Clasificaciones taxonómicas",
+        "Presupuestos con varios niveles"
+      ],
+      "project": {
+        "question": "¿Cómo se distribuyen las pernoctaciones hoteleras de Canarias entre islas y lugares de residencia?",
+        "audience": "Público interesado en conocer la composición territorial del turismo canario.",
+        "selection": "Canarias → las siete islas publicadas por el INE → residentes en España o no residentes en España. Año 2025, exclusivamente hoteles; tabla TPX 82074.",
+        "data_source_id": "ine-sunburst-source",
+        "total_shown": 72956848,
+        "source_notes": [
+          "La Graciosa no dispone de fila independiente en esta tabla: no se inventa un desglose.",
+          "Se usan los totales anuales publicados. El Hierro tiene datos mensuales no disponibles en mayo y octubre, pero sí valores anuales publicados para ambas categorías.",
+          "Los ángulos se calculan con las catorce hojas, cuya suma es 72.956.848 pernoctaciones. En Lanzarote la suma de sus hojas supera en una unidad el total insular publicado; se preservan ambas cifras y se documenta la diferencia compatible con redondeo.",
+          "Se excluyen Sur de Gran Canaria y Sur de Tenerife, que se solapan con sus respectivas islas."
+        ],
+        "insight_rule": "Distinguir el peso de cada isla en Canarias y la composición de procedencias dentro de ella; son denominadores diferentes."
+      },
+      "spoken_base": "El Sunburst muestra una jerarquía con anillos. El proyecto de Stasko y colaboradores se desarrolló a finales de los noventa, y Stasko y Zhang publicaron mejoras de navegación en 2000. En nuestro ejemplo el centro representa Canarias; después aparecen las islas y el desglose por residencia. El ángulo representa las pernoctaciones y la distancia al centro representa el nivel de detalle. No debemos sumar los anillos: muestran el mismo total descompuesto. La técnica hace clara esa estructura, pero los sectores pequeños son difíciles de comparar. Por eso mantenemos pocos niveles y ofrecemos las cifras exactas en el detalle."
+    },
+    "spiral": {
+      "name": "Spiral Plot, diagrama en espiral temporal",
+      "definition": "Serie temporal distribuida sobre una trayectoria espiral que combina avance cronológico y alineación de fases de un ciclo.",
+      "history": "Carlis y Konstan publicaron Interactive Visualization of Serial Periodic Data en 1998. Weber, Alexa y Müller desarrollaron el enfoque Spiral Graph en Visualizing Time-Series on Spirals, publicado en 2001. Son referencias modernas de la técnica, no una atribución del origen histórico de cualquier dibujo en espiral.",
+      "history_source_ids": [
+        "carlis-konstan-1998",
+        "weber-alexa-muller-2001"
+      ],
+      "encoding": {
+        "trajectory": "Espiral de Arquímedes: el avance hacia fuera representa el tiempo.",
+        "turn": "Un año completo.",
+        "angular_phase": "Mes del año, con doce intervalos angulares iguales y siempre el mismo orden.",
+        "color": "Pernoctaciones absolutas o porcentaje que aporta ese mes al total anual del territorio y residencia seleccionados.",
+        "radius_caution": "El radio de la curva representa el tiempo. En modo Altura, la punta de cada barra combina ese radio y la altura del valor. Se compara la altura desde la curva, no la distancia al centro ni el área.",
+        "height": "Opción Altura: barras de un solo color. La distancia radial desde la curva hasta el extremo es proporcional al valor, en escala lineal desde cero y común a ambos territorios."
+      },
+      "data": {
+        "structure": "Una observación por territorio, residencia y mes; frecuencia temporal regular y ciclo anual conocido.",
+        "temporal": "Meses ordenados de enero de 2015 a diciembre de 2025.",
+        "categorical": [
+          "territorio",
+          "residencia del viajero"
+        ],
+        "quantitative": "Pernoctaciones hoteleras, con unidad y cobertura constantes.",
+        "constraints": [
+          "Los meses sin dato deben conservar su posición en el calendario.",
+          "Un cero observado se distingue de un dato ausente.",
+          "El porcentaje anual exige denominador positivo y año con cobertura completa para la serie seleccionada.",
+          "Los meses tienen distinta duración; los totales mensuales no son una tasa diaria ajustada.",
+          "La comparación requiere el mismo periodo, el mismo filtro de residencia, orientación, tamaño y escala de representación.",
+          "Las observaciones provisionales o las rupturas metodológicas se documentan; no se interpolan silenciosamente.",
+          "Las alturas se escalan con el máximo de la selección conjunta. No se recortan valores ni se asigna una altura mínima a los ceros."
+        ]
+      },
+      "advantages": [
+        "Facilita reconocer ciclos repetidos y cambios de fase entre años.",
+        "Agrupa una serie larga en una vista compacta.",
+        "La alineación de meses permite comparar estacionalidad entre territorios."
+      ],
+      "limitations": [
+        "Requiere explicar el recorrido temporal y la leyenda.",
+        "El color permite una lectura aproximada, por lo que los valores exactos requieren detalle o tabla.",
+        "Demasiadas vueltas producen bandas muy finas.",
+        "Un periodo mal elegido puede ocultar el patrón buscado.",
+        "Los porcentajes comparan distribución estacional pero ocultan diferencias en volumen; en años de actividad muy baja pueden producir cuotas mensuales altas.",
+        "Las alturas son difíciles de comparar entre vueltas. Un intervalo de tres años permite ver mejor las barras que once vueltas."
+      ],
+      "size_guidance": "La técnica no impone un máximo universal. Para observar repetición necesitamos más de un ciclo; varios años permiten valorar su estabilidad sin demostrar estadísticamente periodicidad. Esta aplicación utiliza once vueltas y 132 posiciones mensuales por territorio. El número de observaciones con dato puede ser menor si existe información ausente.",
+      "usual_applications": [
+        "Temperaturas estacionales",
+        "Consumo energético",
+        "Actividad turística",
+        "Comportamientos con ciclos diarios o semanales"
+      ],
+      "project": {
+        "question": "¿Cómo cambian los patrones estacionales de las pernoctaciones entre territorios y a lo largo de los años?",
+        "audience": "Público interesado en comparar la distribución temporal del turismo.",
+        "selection": "España, comunidades y provincias; comparación de dos territorios, con Canarias y Baleares como ejemplo de lectura.",
+        "percentage_formula": "100 × pernoctaciones del mes / suma de los doce meses del mismo año, territorio y categoría de residencia.",
+        "insight_rule": "Contrastar patrones observados; no asumir de antemano que el máximo de pernoctaciones canarias debe estar en invierno. Temporada alta por precio u ocupación y máximo de pernoctaciones son conceptos distintos."
+      },
+      "spoken_base": "La espiral muestra los meses sobre una curva que avanza con el tiempo. Cada vuelta es un año. Se puede representar la cantidad con color o con la altura de una barra desde la curva. La comparación usa la misma escala en ambos territorios. Para mostrar las barras conviene seleccionar pocos años. Los porcentajes muestran distribución; los valores absolutos muestran volumen."
+    }
+  },
+  "shared_quality_rules": [
+    "Mantener pregunta, población de referencia, año y unidad visibles.",
+    "Incluir leyendas, etiquetas legibles, tabla accesible y acceso al dato exacto.",
+    "Distinguir fuente de datos, fuente bibliográfica y autoría de la visualización.",
+    "Citar la elaboración propia, las transformaciones y las fechas de descarga y actualización.",
+    "Las reglas numéricas de legibilidad se presentan como decisiones de este diseño, no como límites matemáticos universales.",
+    "El guion final debe corresponder al comportamiento y a las cifras efectivamente verificados en la web."
+  ],
+  "recording_structure": {
+    "technique_duration_seconds": 135,
+    "suggested_segments": [
+      {
+        "seconds": 25,
+        "content": "Nombre, antecedente histórico y definición"
+      },
+      {
+        "seconds": 25,
+        "content": "Tipos, estructura, fuente y cobertura de los datos"
+      },
+      {
+        "seconds": 65,
+        "content": "Demostración de lectura e interacción, objetivo y hallazgo comprobado"
+      },
+      {
+        "seconds": 20,
+        "content": "Ventaja, limitación y audiencia"
+      }
+    ],
+    "note": "Es una pauta de preparación, no un guion definitivo ni una garantía de duración. Ensayar con las pantallas terminadas."
+  },
+  "sources": [
+    {
+      "id": "shneiderman-history",
+      "title": "Treemaps for space-constrained visualization of hierarchies",
+      "authors": [
+        "Ben Shneiderman",
+        "Catherine Plaisant"
+      ],
+      "year": "Historia iniciada en 1998; actualizada hasta 2014",
+      "url": "https://www.cs.umd.edu/hcil/treemap-history/",
+      "kind": "Historia del proyecto escrita por sus investigadores"
+    },
+    {
+      "id": "johnson-shneiderman-1991",
+      "title": "Tree-maps: A space-filling approach to the visualization of hierarchical information structures",
+      "authors": [
+        "Brian Johnson",
+        "Ben Shneiderman"
+      ],
+      "year": 1991,
+      "url": "https://www.cs.umd.edu/projects/hcil/pubs/tech-reports.shtml",
+      "kind": "Publicación y registro institucional HCIL-91-06; pp. 284-291"
+    },
+    {
+      "id": "sunburst-project",
+      "title": "SunBurst project",
+      "authors": [
+        "John Stasko y colaboradores"
+      ],
+      "year": "Finales de los noventa y 2000",
+      "url": "https://sites.cc.gatech.edu/gvu/ii/sunburst/",
+      "kind": "Página del proyecto, Georgia Tech"
+    },
+    {
+      "id": "stasko-zhang-2000",
+      "title": "Focus+Context Display and Navigation Techniques for Enhancing Radial, Space-Filling Hierarchy Visualizations",
+      "authors": [
+        "John Stasko",
+        "Eugene Zhang"
+      ],
+      "year": 2000,
+      "url": "https://faculty.cc.gatech.edu/~stasko/papers/infovis00.pdf",
+      "kind": "Artículo original, IEEE InfoVis, pp. 57-65",
+      "note": "Las referencias 1 y 3 identifican los antecedentes de Andrews/Heidegger y Chuah en 1998; la referencia 11 acredita un trabajo del equipo Sunburst de 1999."
+    },
+    {
+      "id": "stasko-et-al-2000",
+      "title": "An evaluation of space-filling information visualizations for depicting hierarchical structures",
+      "authors": [
+        "John Stasko",
+        "Richard Catrambone",
+        "Mark Guzdial",
+        "Kevin McDonald"
+      ],
+      "year": 2000,
+      "url": "https://faculty.cc.gatech.edu/~stasko/papers/ijhcs00.pdf",
+      "doi": "10.1006/ijhc.2000.0420",
+      "kind": "Artículo original, International Journal of Human-Computer Studies 53, pp. 663-694"
+    },
+    {
+      "id": "carlis-konstan-1998",
+      "title": "Interactive Visualization of Serial Periodic Data",
+      "authors": [
+        "John V. Carlis",
+        "Joseph A. Konstan"
+      ],
+      "year": 1998,
+      "url": "https://experts.umn.edu/en/publications/interactive-visualization-of-serial-periodic-data/",
+      "full_text_url": "https://files.grouplens.org/papers/p29-carlis.pdf",
+      "doi": "10.1145/288392.288399",
+      "kind": "Artículo original, UIST 1998, pp. 29-38"
+    },
+    {
+      "id": "weber-alexa-muller-2001",
+      "title": "Visualizing Time-Series on Spirals",
+      "authors": [
+        "Marc Weber",
+        "Marc Alexa",
+        "Wolfgang Müller"
+      ],
+      "year": 2001,
+      "url": "https://doi.org/10.1109/INFVIS.2001.963273",
+      "author_publication_list_url": "https://cg.tu-berlin.de/people/marc-alexa",
+      "kind": "Artículo original, IEEE Symposium on Information Visualization 2001",
+      "note": "Se omite paginación por discrepancias entre registros consultados. El enlace antiguo del temario a cs.lnu.se devolvió 404; el DOI y la lista institucional del coautor confirman autores, título y año."
+    },
+    {
+      "id": "catalogue-course",
+      "title": "Catálogo de Visualización de Datos: mapa de árbol, tarta multinivel y diagrama en espiral",
+      "url": "https://datavizcatalogue.com/ES/",
+      "local_path": "cat2/temario/elementos de una visualización/data viz project/catalogo_visualizaciones.md",
+      "kind": "Recurso proporcionado en el temario; definiciones y anatomías"
+    },
+    {
+      "id": "ine-source",
+      "title": "Encuesta de Ocupación Hotelera: viajeros y pernoctaciones por comunidades autónomas y provincias, tabla 2074",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?L=0&t=2074",
+      "kind": "Fuente oficial de datos; instantánea y cobertura en los metadatos de extracción"
+    },
+    {
+      "id": "ine-sunburst-source",
+      "title": "Encuesta de ocupación hotelera 2025: pernoctaciones de los viajeros por zonas turísticas, país de residencia y meses, TPX 82074",
+      "url": "https://www.ine.es/jaxi/Tabla.htm?tpx=82074&L=0",
+      "download_url": "https://www.ine.es/jaxi/files/tpx/es/csv_bdsc/82074.csv",
+      "kind": "Fuente oficial del Sunburst; se seleccionan los datos anuales publicados de las siete islas y dos categorías de residencia",
+      "note": "Metadatos y reconciliación comprobados en data/processed/sunburst.json. Fecha de actualización observada: 2026-08-14; descarga: 2026-10-30. Información estadística bajo CC BY 4.0."
+    },
+    {
+      "id": "ine-reuse",
+      "title": "Aviso legal del INE: reutilización de la información",
+      "url": "https://www.ine.es/aviso_legal/",
+      "kind": "Condiciones oficiales de reutilización",
+      "note": "Licencia general de información estadística CC BY 4.0, salvo indicación contraria; citar la elaboración propia si hay tratamiento de los datos."
+    }
+  ]
+}
